@@ -1,0 +1,17 @@
+[
+  {
+    "username": "standard_user",
+    "password": "secret_sauce",
+    "login_example": true
+  },
+  {
+    "username": "standard_user", 
+    "password": "password_erronea",
+    "login_example": false
+  },
+  {
+    "username": "usuario_erroneo",
+    "password": "secret_sauce", 
+    "login_example": true
+  }
+]

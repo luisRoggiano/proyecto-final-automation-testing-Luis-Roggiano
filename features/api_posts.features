@@ -1,0 +1,25 @@
+feature: API test de JSON
+
+    Background:
+        Given API Connected OK
+
+        Scenario: Get Posts
+            When GET a "/posts"
+            then Status Code should be 200
+
+        Scenario Outline: different endpoints tests
+            When Get <endpoint>
+            Then Status Code should be <status>
+
+            Examples:
+                | endpoint    | status |
+                | "/posts/1"  | 200    |
+                | "/users"    | 200    |
+                | "/invalid"  | 404    |
+
+        Scenario: Table POST
+            When POST to "/posts" with:
+                | title  | Mi titulo |
+                | body   | Mi contenido |
+                | userId | 1 |
+            Then Status Code should be 201
