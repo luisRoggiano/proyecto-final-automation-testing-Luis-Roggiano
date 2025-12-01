@@ -1,28 +1,75 @@
 # Proyecto Final: Automation Testing
 
 ## Descripción
-Este es el proyecto final para el curso de Automation Testing. Incluye pruebas automatizadas para:
-- **UI Testing**: Usando Selenium y Pytest para probar el sitio web de demostración SauceDemo (https://www.saucedemo.com/), cubriendo login, visualización de inventario, operaciones de carrito, checkout y validaciones.
-- **API Testing**: Pruebas de regresión para la API JSONPlaceholder (https://jsonplaceholder.typicode.com/), incluyendo obtener, crear y eliminar posts.
+Proyecto final del curso de **Automation Testing** con pruebas automatizadas de **UI** y **API** aplicando las mejores prácticas actuales.
 
-El proyecto utiliza el patrón Page Object Model (POM) para las pruebas UI, y requests para las API. Las pruebas están parametrizadas donde aplica (e.g., casos de login).
+### Pruebas incluidas
+- **UI Testing** con **Selenium WebDriver + Pytest**  
+  Sitio objetivo: https://www.saucedemo.com  
+  Cobertura: Login (éxito y fallo), inventario, carrito, checkout con validaciones y flujo completo de compra.
 
-## Estructura del Proyecto
-- `test/`: Directorio con los archivos de pruebas.
-  - `test_login.py`: Pruebas de login con usuarios válidos e inválidos.
-  - `test_inventario.py`: Pruebas para la página de inventario.
-  - `test_carrito.py`: Pruebas para agregar y remover items del carrito.
-  - `test_checkout_pagina.py`: Pruebas para el proceso de checkout y validaciones.
-  - `test_checkout_paginaCompleta.py`: Flujo completo de compra.
-  - `test_regression_HTML.py`: Pruebas API para JSONPlaceholder (obtener, crear, eliminar posts).
-- `conftest.py`: Fixtures compartidas (e.g., setup de Selenium WebDriver).
-- `requirements.txt`: Dependencias del proyecto.
-- (Opcional) `pages/`: Clases Page Object para elementos UI.
+- **API Testing** con **requests + Pytest**  
+  API objetivo: https://jsonplaceholder.typicode.com  
+  Casos: GET posts, POST nuevo post y DELETE post.
+
+Se implementa el patrón **Page Object Model (POM)** para mantener el código limpio, reutilizable y fácil de mantener.
+
+## Características destacadas
+- Ejecución en modo **headless** (sin ventana del navegador)
+- Logs detallados en `logs/historial.log` (4 logs por prueba)
+- Capturas de pantalla automáticas en caso de fallo → `test/screenshots/`
+- Uso de `webdriver-manager` → no es necesario descargar chromedriver manualmente
+- Pruebas parametrizadas (login con múltiples usuarios)
+- Configuración centralizada en `conftest.py` y `pytest.ini`
+- Manejo de pop-ups de contraseña de Chrome desactivado
+
+## Estructura del proyecto
+proyecto-final-automation-testing-Luis-Roggiano/
+├── test/
+│   ├── test_login.py                  # Pruebas de login parametrizadas
+│   ├── test_inventario.py             # Verificación de inventario y logout
+│   ├── test_carrito.py                # Agregar y remover productos del carrito
+│   ├── test_checkout_pagina.py        # Checkout + validaciones de campos
+│   ├── test_checkout_paginaCompleta.py# Flujo completo de compra
+│   ├── test_regression_HTML.py        # Pruebas API JSONPlaceholder
+│   └── conftest.py                    # Fixture de WebDriver + screenshots + logs
+├── page/
+│   ├── login.py
+│   ├── inventario.py
+│   ├── paginaCarrito.py
+│   ├── checkout_pagina.py
+│   └── checkout_paginaCompleta.py
+├── data/
+│   └── data_login.py                  # Casos de prueba para login
+├── logs/
+│   └── historial.log                  # Log automático de todas las ejecuciones
+├── test/screenshots/                  # Capturas automáticas en fallos
+├── pytest.ini                         # Configuración de logs en archivo
+├── requirements.txt
+└── README.md
 
 ## Requisitos
-- Python 3.10+
-- Navegador compatible (e.g., Chrome) y su WebDriver (e.g., chromedriver) en el PATH.
-- Dependencias: `pytest`, `selenium`, `requests`, etc.
+- Python 3.10 o superior
+- Google Chrome instalado (cualquier versión reciente)
 
-## Instalación
-1. Clona el repositorio:
+## Instalación y ejecución
+
+'''
+bash
+# 1. Clonar el repositorio
+git clone https://github.com/tu-usuario/proyecto-final-automation-testing-Luis-Roggiano.git
+cd proyecto-final-automation-testing-Luis-Roggiano
+
+# 2. (Recomendado) Crear entorno virtual
+python -m venv venv
+source venv/bin/activate        # Windows: venv\Scripts\activate
+
+# 3. Instalar dependencias
+pip install -r requirements.txt
+
+# 4. Ejecutar todas las pruebas
+pytest -v
+
+# Opcional: generar reporte HTML bonito
+pytest -v --html=report.html --self-contained-html
+'''
